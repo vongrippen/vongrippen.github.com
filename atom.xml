@@ -4,13 +4,22 @@
   <title>Mike Cochran</title>
   <link href="http://vongrippen.com/atom.xml" rel="self"/>
   <link href="http://vongrippen.com/"/>
-  <updated>2011-09-27T20:44:37-05:00</updated>
+  <updated>2011-09-28T13:16:52-05:00</updated>
   <id>http://vongrippen.com/</id>
   <author>
     <name>Mike Cochran</name>
     
   </author>
 
+  
+  <entry>
+    <title>Using RVM</title>
+    <link href="http://vongrippen.com/blog/2011/09/28/using-rvm/"/>
+    <updated>2011-09-28T13:16:00-05:00</updated>
+    <id>http://vongrippen.com/blog/2011/09/28/using-rvm</id>
+    <content type="html">&lt;p&gt;I&amp;#8217;m using RVM&lt;/p&gt;
+</content>
+  </entry>
   
   <entry>
     <title>Up and Running on Octopress!</title>
