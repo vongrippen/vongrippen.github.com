@@ -4,12 +4,25 @@
   <title>Mike Cochran</title>
   <link href="http://vongrippen.com/atom.xml" rel="self"/>
   <link href="http://vongrippen.com/"/>
-  <updated>2011-09-27T16:55:14-05:00</updated>
+  <updated>2011-09-27T20:25:06-05:00</updated>
   <id>http://vongrippen.com/</id>
   <author>
     <name>Mike Cochran</name>
     
   </author>
 
+  
+  <entry>
+    <title>Up and Running on Octopress!</title>
+    <link href="http://vongrippen.com/blog/2011/09/27/up-and-running-on-octopress/"/>
+    <updated>2011-09-27T20:13:00-05:00</updated>
+    <id>http://vongrippen.com/blog/2011/09/27/up-and-running-on-octopress</id>
+    <content type="html">&lt;p&gt;I&amp;#8217;ve relaunched using &lt;a href=&quot;http://www.octopress.org&quot;&gt;Octopress&lt;/a&gt; to power this new
+site. If you haven&amp;#8217;t checked it out before, I highly recommend that you do.
+Now that things are simpler than ever to post, I&amp;#8217;m hoping to get to posting
+more tips, tricks, and tutorials than ever before. So be sure to check back
+and see what I&amp;#8217;m up to.&lt;/p&gt;
+</content>
+  </entry>
   
 </feed>
