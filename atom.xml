@@ -4,13 +4,398 @@
   <title>Mike Cochran</title>
   <link href="http://vongrippen.com/atom.xml" rel="self"/>
   <link href="http://vongrippen.com/"/>
-  <updated>2011-09-29T10:08:58-05:00</updated>
+  <updated>2011-09-29T14:27:06-05:00</updated>
   <id>http://vongrippen.com/</id>
   <author>
     <name>Mike Cochran</name>
     
   </author>
 
+  
+  <entry>
+    <title>Rev Your Ruby With RVM</title>
+    <link href="http://vongrippen.com/blog/2011/09/29/rev-your-ruby-with-rvm/"/>
+    <updated>2011-09-29T11:06:00-05:00</updated>
+    <id>http://vongrippen.com/blog/2011/09/29/rev-your-ruby-with-rvm</id>
+    <content type="html">&lt;h2&gt;What&amp;#8217;s this RVM thing?&lt;/h2&gt;
+
+&lt;p&gt;&lt;span class=&#8217;has-pullquote&#8217; data-pullquote=&#8217;RVM is Ruby Version Manager &#8216;&gt;
+Simply: RVM is Ruby Version Manager.&lt;/p&gt;
+
+&lt;p&gt;There you go all done, see you back here next week!&lt;/p&gt;
+
+&lt;p&gt;Ok, in all seriousness RVM is a fantastic tool when you are working with
+multiple ruby projects. It allows you to install multiple versions (and
+implementations) of the ruby interpreter and use different ones for different
+projects. It also extends all the way down to your gems, allowing you to have
+completely different sets of gems installed for different projects.&lt;/p&gt;
+
+&lt;p&gt;I&amp;#8217;m not going to go into deep technical details here. If you want to go in
+depth, check out the &lt;a href=&quot;https://rvm.beginrescueend.com/&quot;&gt;RVM website&lt;/a&gt;.
+&lt;/span&gt;&lt;/p&gt;
+
+&lt;h2&gt;Ok, but why do I need it?&lt;/h2&gt;
+
+&lt;p&gt;RVM sounds kinda interesting and maybe it might conceivably be useful, but you
+don&amp;#8217;t see how you could ever have an actual use for it right? Wrong!&lt;/p&gt;
+
+&lt;!&#8211; more &#8211;&gt;
+
+
+&lt;p&gt;Let&amp;#8217;s take 2 projects that I have right now:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Shiny new Rails 3 app that acts as an OpenID provider&lt;/li&gt;
+&lt;li&gt;Legacy Rails 2.3.8 project management app that is too big to migrate at the moment&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;h3&gt;Rubies of many shades and varieties&lt;/h3&gt;
+
+&lt;p&gt;&lt;span class=&#8217;has-pullquote&#8217; data-pullquote=&#8217;So I clearly have to have both 1.8.7 and 1.9.2 installed, but how? &#8216;&gt;
+This Rails 3 app that I&amp;#8217;m working on was written specifically with Ruby 1.9 in
+mind and takes advantage of a couple of new things so it won&amp;#8217;t even run on 1.8.7.&lt;/p&gt;
+
+&lt;p&gt;Meanwhile my Rails 2.3.8 app has a lot going on in it involving time tracking
+and we all know that date handling changed from 1.8 to 1.9. Some would say,
+well just go fix that 2.3.8 app to run on 1.9. Unfortunately this is not an
+option because there are a lot of other things going on that are different from
+1.8 to 1.9 and I just don&amp;#8217;t have the time right now.&lt;/p&gt;
+
+&lt;p&gt;So I clearly have to have both 1.8.7 and 1.9.2 installed, but how? Here is where RVM comes in.
+&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;Using RVM I can install both versions and switch between them. Here&amp;#8217;s what I mean:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# The system-provided ruby
+$ ruby -v
+ruby 1.8.7 (2010-01-10 patchlevel 249) [universal-darwin11.0]
+
+# Now let&#8217;s use RVM&#8217;s ruby 1.8.7
+$ rvm use 1.8.7
+Using /Users/vongrippen/.rvm/gems/ruby-1.8.7-p334
+$ ruby -v
+ruby 1.8.7 (2011-02-18 patchlevel 334) [i686-darwin10.7.0]
+
+# Now lets use ruby 1.9.2
+$ rvm use 1.9.2
+Using /Users/vongrippen/.rvm/gems/ruby-1.9.2-p180
+$ ruby -v
+ruby 1.9.2p180 (2011-02-18 revision 30909) [x86_64-darwin11.1.0]
+
+# I could even switch to another variety of ruby even, like JRuby
+$ rvm use jruby
+Using /Users/vongrippen/.rvm/gems/jruby-1.6.2
+$ ruby -v
+jruby 1.6.2 (ruby-1.8.7-p330) (2011-05-23 e2ea975) (Java HotSpot(TM) 64-Bit Server VM 1.6.0_26) [darwin-x86_64-java]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;As I work I can change ruby versions at will, pretty useful isn&amp;#39;t it?&lt;/p&gt;
+
+&lt;h3&gt;Gems of every shape and size&lt;/h3&gt;
+
+&lt;p&gt;&lt;span class=&#8217;has-pullquote&#8217; data-pullquote=&#8217;RVM saves the day again with gemsets. &#8216;&gt;
+Rubygems allows me to install multiple versions of a gem so I should be good,
+right? Alas, no.&lt;/p&gt;
+
+&lt;p&gt;My Rails 3 app has a dependency on rubygems 1.7 or higher, but the rails 2.3
+app will only run if rubygems is version 1.4.2 or lower! This is more than just
+a slight problem for me since I&amp;#8217;m doing development work in both and can&amp;#8217;t be
+reinstalling rubygems all day long when I switch. Not to mention that they
+require different versions of rack that interfere with each other.&lt;/p&gt;
+
+&lt;p&gt;Here, RVM saves the day again with gemsets. RVM includes another feature
+called gemsets, which are complete rubygems environments all bottled up and
+separated.&lt;/p&gt;
+
+&lt;p&gt;Let me show you an example:&lt;/p&gt;
+
+&lt;figure class=&#8217;code&#8217;&gt;&lt;figcaption&gt;&lt;span&gt;The gemset for my Rails 2.3.8 app&lt;/span&gt;&lt;/figcaption&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre class=&quot;line-numbers&quot;&gt;&lt;span class=&#8217;line-number&#8217;&gt;1&lt;/span&gt;
+&lt;span class=&#8217;line-number&#8217;&gt;2&lt;/span&gt;
+&lt;span class=&#8217;line-number&#8217;&gt;3&lt;/span&gt;
+&lt;span class=&#8217;line-number&#8217;&gt;4&lt;/span&gt;
+&lt;span class=&#8217;line-number&#8217;&gt;5&lt;/span&gt;
+&lt;span class=&#8217;line-number&#8217;&gt;6&lt;/span&gt;
+&lt;span class=&#8217;line-number&#8217;&gt;7&lt;/span&gt;
+&lt;span class=&#8217;line-number&#8217;&gt;8&lt;/span&gt;
+&lt;span class=&#8217;line-number&#8217;&gt;9&lt;/span&gt;
+&lt;span class=&#8217;line-number&#8217;&gt;10&lt;/span&gt;
+&lt;span class=&#8217;line-number&#8217;&gt;11&lt;/span&gt;
+&lt;span class=&#8217;line-number&#8217;&gt;12&lt;/span&gt;
+&lt;span class=&#8217;line-number&#8217;&gt;13&lt;/span&gt;
+&lt;span class=&#8217;line-number&#8217;&gt;14&lt;/span&gt;
+&lt;span class=&#8217;line-number&#8217;&gt;15&lt;/span&gt;
+&lt;span class=&#8217;line-number&#8217;&gt;16&lt;/span&gt;
+&lt;span class=&#8217;line-number&#8217;&gt;17&lt;/span&gt;
+&lt;span class=&#8217;line-number&#8217;&gt;18&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#8217;code&#8217;&gt;&lt;pre&gt;&lt;code class=&#8217;bash&#8217;&gt;&lt;span class=&#8217;line&#8217;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;rvm use 1.8.7@rails2.3.8
+&lt;/span&gt;&lt;span class=&#8217;line&#8217;&gt;Using /Users/vongrippen/.rvm/gems/ruby-1.8.7-p334 with gemset rails2.3.8
+&lt;/span&gt;&lt;span class=&#8217;line&#8217;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;gem -v
+&lt;/span&gt;&lt;span class=&#8217;line&#8217;&gt;1.4.2
+&lt;/span&gt;&lt;span class=&#8217;line&#8217;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;gem list -l
+&lt;/span&gt;&lt;span class=&#8217;line&#8217;&gt;
+&lt;/span&gt;&lt;span class=&#8217;line&#8217;&gt;*** LOCAL GEMS ***
+&lt;/span&gt;&lt;span class=&#8217;line&#8217;&gt;
+&lt;/span&gt;&lt;span class=&#8217;line&#8217;&gt;actionmailer &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;2.3.8&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&#8217;line&#8217;&gt;actionpack &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;2.3.8&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&#8217;line&#8217;&gt;activerecord &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;2.3.8&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&#8217;line&#8217;&gt;activeresource &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;2.3.8&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&#8217;line&#8217;&gt;activesupport &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;2.3.8&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&#8217;line&#8217;&gt;rack &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;1.1.2&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&#8217;line&#8217;&gt;rails &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;2.3.8&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&#8217;line&#8217;&gt;rake &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;0.8.7&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&#8217;line&#8217;&gt;sqlite3 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;1.3.4&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&#8217;line&#8217;&gt;sqlite3-ruby &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;1.3.3&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;&lt;/figure&gt;
+
+
+
+
+&lt;figure class=&#8217;code&#8217;&gt;&lt;figcaption&gt;&lt;span&gt;Using the rails3.1 gemset I&amp;#8217;ve created&lt;/span&gt;&lt;/figcaption&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre class=&quot;line-numbers&quot;&gt;&lt;span class=&#8217;line-number&#8217;&gt;1&lt;/span&gt;
+&lt;span class=&#8217;line-number&#8217;&gt;2&lt;/span&gt;
+&lt;span class=&#8217;line-number&#8217;&gt;3&lt;/span&gt;
+&lt;span class=&#8217;line-number&#8217;&gt;4&lt;/span&gt;
+&lt;span class=&#8217;line-number&#8217;&gt;5&lt;/span&gt;
+&lt;span class=&#8217;line-number&#8217;&gt;6&lt;/span&gt;
+&lt;span class=&#8217;line-number&#8217;&gt;7&lt;/span&gt;
+&lt;span class=&#8217;line-number&#8217;&gt;8&lt;/span&gt;
+&lt;span class=&#8217;line-number&#8217;&gt;9&lt;/span&gt;
+&lt;span class=&#8217;line-number&#8217;&gt;10&lt;/span&gt;
+&lt;span class=&#8217;line-number&#8217;&gt;11&lt;/span&gt;
+&lt;span class=&#8217;line-number&#8217;&gt;12&lt;/span&gt;
+&lt;span class=&#8217;line-number&#8217;&gt;13&lt;/span&gt;
+&lt;span class=&#8217;line-number&#8217;&gt;14&lt;/span&gt;
+&lt;span class=&#8217;line-number&#8217;&gt;15&lt;/span&gt;
+&lt;span class=&#8217;line-number&#8217;&gt;16&lt;/span&gt;
+&lt;span class=&#8217;line-number&#8217;&gt;17&lt;/span&gt;
+&lt;span class=&#8217;line-number&#8217;&gt;18&lt;/span&gt;
+&lt;span class=&#8217;line-number&#8217;&gt;19&lt;/span&gt;
+&lt;span class=&#8217;line-number&#8217;&gt;20&lt;/span&gt;
+&lt;span class=&#8217;line-number&#8217;&gt;21&lt;/span&gt;
+&lt;span class=&#8217;line-number&#8217;&gt;22&lt;/span&gt;
+&lt;span class=&#8217;line-number&#8217;&gt;23&lt;/span&gt;
+&lt;span class=&#8217;line-number&#8217;&gt;24&lt;/span&gt;
+&lt;span class=&#8217;line-number&#8217;&gt;25&lt;/span&gt;
+&lt;span class=&#8217;line-number&#8217;&gt;26&lt;/span&gt;
+&lt;span class=&#8217;line-number&#8217;&gt;27&lt;/span&gt;
+&lt;span class=&#8217;line-number&#8217;&gt;28&lt;/span&gt;
+&lt;span class=&#8217;line-number&#8217;&gt;29&lt;/span&gt;
+&lt;span class=&#8217;line-number&#8217;&gt;30&lt;/span&gt;
+&lt;span class=&#8217;line-number&#8217;&gt;31&lt;/span&gt;
+&lt;span class=&#8217;line-number&#8217;&gt;32&lt;/span&gt;
+&lt;span class=&#8217;line-number&#8217;&gt;33&lt;/span&gt;
+&lt;span class=&#8217;line-number&#8217;&gt;34&lt;/span&gt;
+&lt;span class=&#8217;line-number&#8217;&gt;35&lt;/span&gt;
+&lt;span class=&#8217;line-number&#8217;&gt;36&lt;/span&gt;
+&lt;span class=&#8217;line-number&#8217;&gt;37&lt;/span&gt;
+&lt;span class=&#8217;line-number&#8217;&gt;38&lt;/span&gt;
+&lt;span class=&#8217;line-number&#8217;&gt;39&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#8217;code&#8217;&gt;&lt;pre&gt;&lt;code class=&#8217;bash&#8217;&gt;&lt;span class=&#8217;line&#8217;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;rvm use 1.9.2@rails3.1
+&lt;/span&gt;&lt;span class=&#8217;line&#8217;&gt;Using /Users/vongrippen/.rvm/gems/ruby-1.9.2-p180 with gemset rails3.1
+&lt;/span&gt;&lt;span class=&#8217;line&#8217;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;gem -v
+&lt;/span&gt;&lt;span class=&#8217;line&#8217;&gt;1.8.10
+&lt;/span&gt;&lt;span class=&#8217;line&#8217;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;gem list -l
+&lt;/span&gt;&lt;span class=&#8217;line&#8217;&gt;
+&lt;/span&gt;&lt;span class=&#8217;line&#8217;&gt;*** LOCAL GEMS ***
+&lt;/span&gt;&lt;span class=&#8217;line&#8217;&gt;
+&lt;/span&gt;&lt;span class=&#8217;line&#8217;&gt;actionmailer &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;3.1.0&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&#8217;line&#8217;&gt;actionpack &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;3.1.0&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&#8217;line&#8217;&gt;activemodel &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;3.1.0&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&#8217;line&#8217;&gt;activerecord &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;3.1.0&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&#8217;line&#8217;&gt;activeresource &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;3.1.0&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&#8217;line&#8217;&gt;activesupport &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;3.1.0&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&#8217;line&#8217;&gt;arel &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;2.2.1&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&#8217;line&#8217;&gt;bcrypt-ruby &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;3.0.1&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&#8217;line&#8217;&gt;builder &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;3.0.0&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&#8217;line&#8217;&gt;bundler &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;1.0.20&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&#8217;line&#8217;&gt;erubis &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;2.7.0&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&#8217;line&#8217;&gt;hike &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;1.2.1&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&#8217;line&#8217;&gt;i18n &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;0.6.0&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&#8217;line&#8217;&gt;mail &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;2.3.0&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&#8217;line&#8217;&gt;mime-types &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;1.16&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&#8217;line&#8217;&gt;multi_json &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;1.0.3&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&#8217;line&#8217;&gt;polyglot &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;0.3.2&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&#8217;line&#8217;&gt;rack &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;1.3.3&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&#8217;line&#8217;&gt;rack-cache &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;1.0.3&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&#8217;line&#8217;&gt;rack-mount &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;0.8.3&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&#8217;line&#8217;&gt;rack-ssl &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;1.3.2&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&#8217;line&#8217;&gt;rack-test &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;0.6.1&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&#8217;line&#8217;&gt;rails &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;3.1.0&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&#8217;line&#8217;&gt;railties &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;3.1.0&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&#8217;line&#8217;&gt;rake &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;0.8.7&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&#8217;line&#8217;&gt;rdoc &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;3.9.4&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&#8217;line&#8217;&gt;sprockets &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;2.0.0&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&#8217;line&#8217;&gt;thor &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;0.14.6&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&#8217;line&#8217;&gt;tilt &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;1.3.3&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&#8217;line&#8217;&gt;treetop &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;1.4.10&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&#8217;line&#8217;&gt;tzinfo &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;0.3.29&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;&lt;/figure&gt;
+
+
+&lt;p&gt;So now I can even switch the entire set of gems from one project to the next
+without them interfering! Life just got a little bit easier when doing ruby
+development.&lt;/p&gt;
+
+&lt;p&gt;&lt;/span&gt;&lt;/p&gt;
+
+&lt;h2&gt;Sounds useful, let&amp;#8217;s install it!&lt;/h2&gt;
+
+&lt;p&gt;Installing it is pretty easy, especially if you are on a Mac. Even still it&amp;#8217;s
+easy on Linux too, you just have to install some extra libraries that most
+distributions don&amp;#8217;t include by default. If you are on Windows? Sorry, but I&amp;#8217;m
+not much help there. I don&amp;#8217;t use Windows at all anymore, so I haven&amp;#8217;t the
+slightest idea how to install rvm there or if it is even possible. Your best
+bet is RVM&amp;#8217;s &lt;a href=&quot;https://rvm.beginrescueend.com/&quot;&gt;official documentation&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3&gt;Got a shiny Mac here, where to start?&lt;/h3&gt;
+
+&lt;p&gt;First things first, do you have &lt;a href=&quot;http://developer.apple.com/xcode/&quot;&gt;Xcode&lt;/a&gt; installed?&lt;/p&gt;
+
+&lt;p&gt;If not you will need to install it. On 10.6 (Snow Leopard) or earlier, look
+for Xcode 3 since it is free. 10.6 can also run Xcode 4.0, but it costs $5
+from the App Store. I&amp;#8217;m using OS X 10.7 Lion, which means I&amp;#8217;ll be using Xcode
+4.1 which is free from the &lt;a href=&quot;http://itunes.apple.com/us/app/xcode/id448457090?mt=12&quot;&gt;Mac App Store&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Also, if you are running Xcode 3 you will need to install &lt;a href=&quot;http://code.google.com/p/git-osx-installer/&quot;&gt;Git&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Now that you have Xcode installed it&amp;#8217;s time to get our hands dirty in a terminal.&lt;/p&gt;
+
+&lt;p&gt;Let&amp;#8217;s download and run the RVM installer all in one simple command&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;bash &amp;lt; &amp;lt;(curl -s https://rvm.beginrescueend.com/install/rvm)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Alright, RVM is installed but we still need to install a few rubies, skip past
+the part on installing RVM in Linux and lets get some rubies.&lt;/p&gt;
+
+&lt;h3&gt;Sometimes I like to get down with a little Linux&lt;/h3&gt;
+
+&lt;p&gt;There is a decent sized list of dependencies that may or may not be installed
+on your system already, I&amp;#8217;ve listed the install commands for some of the most
+common distributions below. If your distro is not on the list, after running
+the base RVM install (before installing any ruby versions), run &lt;code&gt;rvm requirements&lt;/code&gt;
+to see the list of dependencies.&lt;/p&gt;
+
+&lt;p&gt;The absolute bare minimum just to get RVM installed is a system copy of ruby
+and git, but that&amp;#8217;s still not a necessarily functional RVM.&lt;/p&gt;
+
+&lt;figure class=&#8217;code&#8217;&gt;&lt;figcaption&gt;&lt;span&gt;openSUSE&lt;/span&gt;&lt;/figcaption&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre class=&quot;line-numbers&quot;&gt;&lt;span class=&#8217;line-number&#8217;&gt;1&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#8217;code&#8217;&gt;&lt;pre&gt;&lt;code class=&#8217;bash&#8217;&gt;&lt;span class=&#8217;line&#8217;&gt;sudo zypper install -y patterns-openSUSE-devel_basis ruby git gcc-c++ bzip2 readline-devel zlib-devel libxml2-devel libxslt-devel libyaml-devel libopenssl-devel libffi45-devel libtool bison
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;&lt;/figure&gt;
+
+
+
+
+&lt;figure class=&#8217;code&#8217;&gt;&lt;figcaption&gt;&lt;span&gt;Debian/Ubuntu&lt;/span&gt;&lt;/figcaption&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre class=&quot;line-numbers&quot;&gt;&lt;span class=&#8217;line-number&#8217;&gt;1&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#8217;code&#8217;&gt;&lt;pre&gt;&lt;code class=&#8217;bash&#8217;&gt;&lt;span class=&#8217;line&#8217;&gt;sudo apt-get install ruby-full build-essential openssl libreadline6 libreadline6-dev curl git-core zlib1g zlib1g-dev libssl-dev libyaml-dev libsqlite3-0 libsqlite3-dev sqlite3 libxml2-dev libxslt-dev autoconf libc6-dev ncurses-dev automake libtool bison
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;&lt;/figure&gt;
+
+
+
+
+&lt;figure class=&#8217;code&#8217;&gt;&lt;figcaption&gt;&lt;span&gt;Fedora/CentOS&lt;/span&gt;&lt;/figcaption&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre class=&quot;line-numbers&quot;&gt;&lt;span class=&#8217;line-number&#8217;&gt;1&lt;/span&gt;
+&lt;span class=&#8217;line-number&#8217;&gt;2&lt;/span&gt;
+&lt;span class=&#8217;line-number&#8217;&gt;3&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#8217;code&#8217;&gt;&lt;pre&gt;&lt;code class=&#8217;bash&#8217;&gt;&lt;span class=&#8217;line&#8217;&gt;yum install -y ruby git-core gcc-c++ patch readline readline-devel zlib zlib-devel libyaml-devel libffi-devel openssl-devel
+&lt;/span&gt;&lt;span class=&#8217;line&#8217;&gt;yum install -y make bzip2 autoconf automake libtool bison
+&lt;/span&gt;&lt;span class=&#8217;line&#8217;&gt;yum install -y iconv-devel
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;&lt;/figure&gt;
+
+
+
+
+&lt;figure class=&#8217;code&#8217;&gt;&lt;figcaption&gt;&lt;span&gt;Arch&lt;/span&gt;&lt;/figcaption&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre class=&quot;line-numbers&quot;&gt;&lt;span class=&#8217;line-number&#8217;&gt;1&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#8217;code&#8217;&gt;&lt;pre&gt;&lt;code class=&#8217;bash&#8217;&gt;&lt;span class=&#8217;line&#8217;&gt;pacman -Sy &#8211;noconfirm ruby git gcc patch curl zlib readline libxml2 libxslt git autoconf diffutils make libtool bison
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;&lt;/figure&gt;
+
+
+
+
+&lt;figure class=&#8217;code&#8217;&gt;&lt;figcaption&gt;&lt;span&gt;Gentoo&lt;/span&gt;&lt;/figcaption&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre class=&quot;line-numbers&quot;&gt;&lt;span class=&#8217;line-number&#8217;&gt;1&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#8217;code&#8217;&gt;&lt;pre&gt;&lt;code class=&#8217;bash&#8217;&gt;&lt;span class=&#8217;line&#8217;&gt;emerge ruby libiconv readline zlib openssl curl git libyaml sqlite libxslt libtool bison
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;&lt;/figure&gt;
+
+
+&lt;p&gt;Now that you have all of your depedencies and libraries all installed we can
+go about installing RVM.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;bash &amp;lt; &amp;lt;(curl -s https://rvm.beginrescueend.com/install/rvm)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2&gt;Let&amp;#8217;s pick out some rubyies&lt;/h2&gt;
+
+&lt;p&gt;Now that you have RVM itself installed we still need to install at least 1 ruby
+interpreter. Since I&amp;#8217;m using OS X Lion, I&amp;#8217;m going to install 1.8.7, 1.9.2, and
+macruby. MacRuby is a little bit special, because it is Mac only and requires
+that the LLVM compiler suite be installed.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;A full list of available rubies for installation can be found by running &lt;code&gt;rvm list known&lt;/code&gt;&lt;/em&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ rvm install 1.8.7
+Installing Ruby from source to: /Users/vongrippen/.rvm/rubies/ruby-1.8.7-p352, this may take a while depending on your cpu(s)&#8230;
+
+ruby-1.8.7-p352 - #fetching 
+ruby-1.8.7-p352 - #downloading ruby-1.8.7-p352, this may take a while depending on your connection&#8230;
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100 4108k  100 4108k    0     0   180k      0  0:00:22  0:00:22 &#8211;:&#8211;:&#8211;  235k
+100 4108k  100 4108k    0     0   178k      0  0:00:22  0:00:22 &#8211;:&#8211;:&#8211;  178kruby-1.8.7-p352 - #extracting ruby-1.8.7-p352 to /Users/vongrippen/.rvm/src/ruby-1.8.7-p352
+ruby-1.8.7-p352 - #extracted to /Users/vongrippen/.rvm/src/ruby-1.8.7-p352
+ruby-1.8.7-p352 - #configuring 
+ruby-1.8.7-p352 - #compiling 
+ruby-1.8.7-p352 - #installing 
+Removing old Rubygems files&#8230;
+Installing rubygems-1.8.10 for ruby-1.8.7-p352 &#8230;
+Installation of rubygems completed successfully.
+ruby-1.8.7-p352 - adjusting #shebangs for (gem irb erb ri rdoc testrb rake).
+ruby-1.8.7-p352 - #importing default gemsets (/Users/vongrippen/.rvm/gemsets/)
+Install of ruby-1.8.7-p352 - #complete
+
+$ rvm install 1.9.2
+Installing Ruby from source to: /Users/vongrippen/.rvm/rubies/ruby-1.9.2-p290, this may take a while depending on your cpu(s)&#8230;
+
+ruby-1.9.2-p290 - #fetching 
+ruby-1.9.2-p290 - #downloading ruby-1.9.2-p290, this may take a while depending on your connection&#8230;
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100 8604k  100 8604k    0     0   695k      0  0:00:12  0:00:12 &#8211;:&#8211;:&#8211;  939k
+ruby-1.9.2-p290 - #extracting ruby-1.9.2-p290 to /Users/vongrippen/.rvm/src/ruby-1.9.2-p290
+ruby-1.9.2-p290 - #extracted to /Users/vongrippen/.rvm/src/ruby-1.9.2-p290
+Fetching yaml-0.1.4.tar.gz to /Users/vongrippen/.rvm/archives
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100  460k  100  460k    0     0   409k      0  0:00:01  0:00:01 &#8211;:&#8211;:&#8211;  435k
+Extracting yaml-0.1.4.tar.gz to /Users/vongrippen/.rvm/src
+Configuring yaml in /Users/vongrippen/.rvm/src/yaml-0.1.4.
+Compiling yaml in /Users/vongrippen/.rvm/src/yaml-0.1.4.
+Installing yaml to /Users/vongrippen/.rvm/usr
+ruby-1.9.2-p290 - #configuring 
+ruby-1.9.2-p290 - #compiling 
+ ruby-1.9.2-p290 - #installing 
+Removing old Rubygems files&#8230;
+Installing rubygems-1.8.10 for ruby-1.9.2-p290 &#8230;
+Installation of rubygems completed successfully.
+ruby-1.9.2-p290 - adjusting #shebangs for (gem irb erb ri rdoc testrb rake).
+ruby-1.9.2-p290 - #importing default gemsets (/Users/vongrippen/.rvm/gemsets/)
+Install of ruby-1.9.2-p290 - #complete
+
+$ rvm install macruby
+Retrieving MacRuby 0.10 &#8230;
+Archive:  /Users/vongrippen/.rvm/archives/MacRuby%200.10.zip
+  inflating: /Users/vongrippen/.rvm/src/macruby-0.10/MacRuby 0.10.pkg  
+Password: &amp;lt;Your administrative password&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Pretty easy wasn&amp;#8217;t it? Now you have several versions of ruby installed and
+available to you.&lt;/p&gt;
+
+&lt;h2&gt;But wait, there&amp;#8217;s more!&lt;/h2&gt;
+
+&lt;p&gt;You&amp;#8217;ve only gotten started on the capabilities here, there&amp;#8217;s still gemsets,
+rvmrc, and more that I&amp;#8217;m not going to cover in depth here. For more information
+on those huge timesavers, checkout RVM&amp;#8217;s &lt;a href=&quot;http://rvm.beginrescueend.com&quot;&gt;website&lt;/a&gt;.&lt;/p&gt;
+</content>
+  </entry>
   
   <entry>
     <title>Up and Running on Octopress!</title>
