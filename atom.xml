@@ -4,7 +4,7 @@
   <title>Mike Cochran</title>
   <link href="http://vongrippen.com/atom.xml" rel="self"/>
   <link href="http://vongrippen.com/"/>
-  <updated>2011-10-22T22:49:55-05:00</updated>
+  <updated>2011-10-22T22:53:13-05:00</updated>
   <id>http://vongrippen.com/</id>
   <author>
     <name>Mike Cochran</name>
@@ -273,6 +273,8 @@ text editor (if you are using zsh, this file is ~/.zshrc)&lt;/p&gt;
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;&lt;/figure&gt;
 
 
+&lt;p&gt;Now, either reload your profile by running &lt;code&gt;source ~/.profile&lt;/code&gt; or restart your shell to load RVM.&lt;/p&gt;
+
 &lt;p&gt;Alright, RVM is installed but we still need to install a few rubies, skip past
 the part on installing RVM in Linux and lets get some rubies.&lt;/p&gt;
 
@@ -337,6 +339,8 @@ text editor (if you are using zsh, this file is ~/.zshrc)&lt;/p&gt;
 &lt;/pre&gt;&lt;/td&gt;&lt;td class=&#8217;code&#8217;&gt;&lt;pre&gt;&lt;code class=&#8217;bash&#8217;&gt;&lt;span class=&#8217;line&#8217;&gt;  &lt;span class=&quot;o&quot;&gt;[[&lt;/span&gt; -s &lt;span class=&quot;s2&quot;&gt;&amp;quot;$HOME/.rvm/scripts/rvm&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;]]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; . &lt;span class=&quot;s2&quot;&gt;&amp;quot;$HOME/.rvm/scripts/rvm&amp;quot;&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;# This loads RVM into a shell session.&lt;/span&gt;
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;&lt;/figure&gt;
 
+
+&lt;p&gt;Now, either reload your profile by running &lt;code&gt;source ~/.profile&lt;/code&gt; or restart your shell to load RVM.&lt;/p&gt;
 
 &lt;h2&gt;Let&amp;#8217;s pick out some rubyies&lt;/h2&gt;
 
