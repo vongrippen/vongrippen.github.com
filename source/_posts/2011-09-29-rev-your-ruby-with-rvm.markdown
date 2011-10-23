@@ -191,6 +191,13 @@ Now that you have Xcode installed it's time to get our hands dirty in a terminal
 Let's download and run the RVM installer all in one simple command
 
 	bash < <(curl -s https://rvm.beginrescueend.com/install/rvm)
+	
+Now, we need to add RVM to the end of your bash .profile using your favorite
+text editor (if you are using zsh, this file is ~/.zshrc)
+
+``` bash ~/.profile
+  [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" # This loads RVM into a shell session.
+```
 
 Alright, RVM is installed but we still need to install a few rubies, skip past
 the part on installing RVM in Linux and lets get some rubies.
@@ -232,6 +239,13 @@ Now that you have all of your depedencies and libraries all installed we can
 go about installing RVM.
 
 	bash < <(curl -s https://rvm.beginrescueend.com/install/rvm)
+	
+Now, we need to add RVM to the end of your bash .profile using your favorite
+text editor (if you are using zsh, this file is ~/.zshrc)
+
+``` bash ~/.profile
+  [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" # This loads RVM into a shell session.
+```
 
 ## Let's pick out some rubyies ##
 
