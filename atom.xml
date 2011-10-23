@@ -4,7 +4,7 @@
   <title>Mike Cochran</title>
   <link href="http://vongrippen.com/atom.xml" rel="self"/>
   <link href="http://vongrippen.com/"/>
-  <updated>2011-09-29T14:27:06-05:00</updated>
+  <updated>2011-10-22T22:49:55-05:00</updated>
   <id>http://vongrippen.com/</id>
   <author>
     <name>Mike Cochran</name>
@@ -265,6 +265,14 @@ from the App Store. I&amp;#8217;m using OS X 10.7 Lion, which means I&amp;#8217;
 &lt;pre&gt;&lt;code&gt;bash &amp;lt; &amp;lt;(curl -s https://rvm.beginrescueend.com/install/rvm)
 &lt;/code&gt;&lt;/pre&gt;
 
+&lt;p&gt;Now, we need to add RVM to the end of your bash .profile using your favorite
+text editor (if you are using zsh, this file is ~/.zshrc)&lt;/p&gt;
+
+&lt;figure class=&#8217;code&#8217;&gt;&lt;figcaption&gt;&lt;span&gt;~/.profile&lt;/span&gt;&lt;/figcaption&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre class=&quot;line-numbers&quot;&gt;&lt;span class=&#8217;line-number&#8217;&gt;1&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#8217;code&#8217;&gt;&lt;pre&gt;&lt;code class=&#8217;bash&#8217;&gt;&lt;span class=&#8217;line&#8217;&gt;  &lt;span class=&quot;o&quot;&gt;[[&lt;/span&gt; -s &lt;span class=&quot;s2&quot;&gt;&amp;quot;$HOME/.rvm/scripts/rvm&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;]]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; . &lt;span class=&quot;s2&quot;&gt;&amp;quot;$HOME/.rvm/scripts/rvm&amp;quot;&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;# This loads RVM into a shell session.&lt;/span&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;&lt;/figure&gt;
+
+
 &lt;p&gt;Alright, RVM is installed but we still need to install a few rubies, skip past
 the part on installing RVM in Linux and lets get some rubies.&lt;/p&gt;
 
@@ -321,6 +329,14 @@ go about installing RVM.&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;bash &amp;lt; &amp;lt;(curl -s https://rvm.beginrescueend.com/install/rvm)
 &lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now, we need to add RVM to the end of your bash .profile using your favorite
+text editor (if you are using zsh, this file is ~/.zshrc)&lt;/p&gt;
+
+&lt;figure class=&#8217;code&#8217;&gt;&lt;figcaption&gt;&lt;span&gt;~/.profile&lt;/span&gt;&lt;/figcaption&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre class=&quot;line-numbers&quot;&gt;&lt;span class=&#8217;line-number&#8217;&gt;1&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#8217;code&#8217;&gt;&lt;pre&gt;&lt;code class=&#8217;bash&#8217;&gt;&lt;span class=&#8217;line&#8217;&gt;  &lt;span class=&quot;o&quot;&gt;[[&lt;/span&gt; -s &lt;span class=&quot;s2&quot;&gt;&amp;quot;$HOME/.rvm/scripts/rvm&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;]]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; . &lt;span class=&quot;s2&quot;&gt;&amp;quot;$HOME/.rvm/scripts/rvm&amp;quot;&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;# This loads RVM into a shell session.&lt;/span&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;&lt;/figure&gt;
+
 
 &lt;h2&gt;Let&amp;#8217;s pick out some rubyies&lt;/h2&gt;
 
