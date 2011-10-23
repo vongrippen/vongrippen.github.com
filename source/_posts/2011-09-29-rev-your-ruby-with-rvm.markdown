@@ -199,6 +199,8 @@ text editor (if you are using zsh, this file is ~/.zshrc)
   [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" # This loads RVM into a shell session.
 ```
 
+Now, either reload your profile by running `source ~/.profile` or restart your shell to load RVM.
+
 Alright, RVM is installed but we still need to install a few rubies, skip past
 the part on installing RVM in Linux and lets get some rubies.
 
@@ -246,6 +248,8 @@ text editor (if you are using zsh, this file is ~/.zshrc)
 ``` bash ~/.profile
   [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" # This loads RVM into a shell session.
 ```
+
+Now, either reload your profile by running `source ~/.profile` or restart your shell to load RVM.
 
 ## Let's pick out some rubyies ##
 
