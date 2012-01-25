@@ -190,7 +190,7 @@ Now that you have Xcode installed it's time to get our hands dirty in a terminal
 
 Let's download and run the RVM installer all in one simple command
 
-	bash < <(curl -s https://rvm.beginrescueend.com/install/rvm)
+	bash -s stable < <(curl -s https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvm-installer)
 	
 Now, we need to add RVM to the end of your bash .profile using your favorite
 text editor (if you are using zsh, this file is ~/.zshrc)
