@@ -4,7 +4,7 @@
   <title><![CDATA[Mike Cochran]]></title>
   <link href="http://vongrippen.com/atom.xml" rel="self"/>
   <link href="http://vongrippen.com/"/>
-  <updated>2012-01-25T10:24:59-06:00</updated>
+  <updated>2012-01-25T10:28:59-06:00</updated>
   <id>http://vongrippen.com/</id>
   <author>
     <name><![CDATA[Mike Cochran]]></name>
@@ -263,7 +263,7 @@ from the App Store. I&#8217;m using OS X 10.7 Lion, which means I&#8217;ll be us
 
 <p>Let&#8217;s download and run the RVM installer all in one simple command</p>
 
-<pre><code>bash &lt; &lt;(curl -s https://rvm.beginrescueend.com/install/rvm)
+<pre><code>bash -s stable &lt; &lt;(curl -s https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvm-installer)
 </code></pre>
 
 <p>Now, we need to add RVM to the end of your bash .profile using your favorite
