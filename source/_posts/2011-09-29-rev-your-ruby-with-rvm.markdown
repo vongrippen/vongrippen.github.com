@@ -240,7 +240,7 @@ emerge ruby libiconv readline zlib openssl curl git libyaml sqlite libxslt libto
 Now that you have all of your depedencies and libraries all installed we can
 go about installing RVM.
 
-	bash < <(curl -s https://rvm.beginrescueend.com/install/rvm)
+	bash -s stable < <(curl -s https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvm-installer)
 	
 Now, we need to add RVM to the end of your bash .profile using your favorite
 text editor (if you are using zsh, this file is ~/.zshrc)
