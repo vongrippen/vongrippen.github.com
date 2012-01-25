@@ -4,7 +4,7 @@
   <title><![CDATA[Category: bundler | Mike Cochran]]></title>
   <link href="http://vongrippen.com/blog/categories/bundler/atom.xml" rel="self"/>
   <link href="http://vongrippen.com/"/>
-  <updated>2011-12-06T15:06:10-06:00</updated>
+  <updated>2012-01-25T10:24:59-06:00</updated>
   <id>http://vongrippen.com/</id>
   <author>
     <name><![CDATA[Mike Cochran]]></name>
@@ -255,7 +255,7 @@ emerge ruby libiconv readline zlib openssl curl git libyaml sqlite libxslt libto
 <p>Now that you have all of your depedencies and libraries all installed we can
 go about installing RVM.</p>
 
-<pre><code>bash &lt; &lt;(curl -s https://rvm.beginrescueend.com/install/rvm)
+<pre><code>bash -s stable &lt; &lt;(curl -s https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvm-installer)
 </code></pre>
 
 <p>Now, we need to add RVM to the end of your bash .profile using your favorite
