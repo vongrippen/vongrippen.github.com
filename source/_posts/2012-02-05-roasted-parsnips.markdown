@@ -9,7 +9,7 @@ categories: recipes
 So, I've decided that I should branch out a little bit and... actually start
 posting things. Anyways, on with the post!
 
-_In my best game show host voice_
+_In my best game show host voice:_
 
 What's new this time? Food! That's right, food. Everyone's favorite thing to
 eat! Fresh from your kitchen in approximately 45 minutes, you too can enjoy
