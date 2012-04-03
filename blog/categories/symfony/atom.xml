@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: symfony | Mike Cochran]]></title>
+  <link href="http://vongrippen.com/blog/categories/symfony/atom.xml" rel="self"/>
+  <link href="http://vongrippen.com/"/>
+  <updated>2012-04-03T17:02:29-05:00</updated>
+  <id>http://vongrippen.com/</id>
+  <author>
+    <name><![CDATA[Mike Cochran]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Next Up? Symfony]]></title>
+    <link href="http://vongrippen.com/blog/2012/04/03/next-up-symfony/"/>
+    <updated>2012-04-03T16:55:00-05:00</updated>
+    <id>http://vongrippen.com/blog/2012/04/03/next-up-symfony</id>
+    <content type="html"><![CDATA[<p>So, I've decided it was time to learn some PHP. I mean, phpinfo() and include()
+are all I really need to know right? <em>Wrong</em>.</p>
+
+<p>Thus, I have decided it is time to sit down and learn a bit of PHP. Now that I've
+reached that decision, where to start? What better place than a framework that
+I hear good things about, is supposedly similar to Rails, and I know a lot of
+my friends use?</p>
+
+<p>And so it begins...</p>
+
+<p>I'll try to track my success/failure here, but no promises. Because <em>everyone</em>
+knows how frequently I actually post, not to mention the fine quality of said
+posts. <em>sic</em></p>
+]]></content>
+  </entry>
+  
+</feed>
