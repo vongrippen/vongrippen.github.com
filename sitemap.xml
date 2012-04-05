@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
+    <url>
+        <loc>http://vongrippen.com/blog/2011/09/27/up-and-running-on-octopress/</loc>
+        <lastmod>2012-04-05T11:48:48-05:00</lastmod>
+    </url>
+    <url>
+        <loc>http://vongrippen.com/blog/2011/09/29/rev-your-ruby-with-rvm/</loc>
+        <lastmod>2012-04-05T11:48:48-05:00</lastmod>
+    </url>
+    <url>
+        <loc>http://vongrippen.com/blog/2012/02/05/roasted-parsnips/</loc>
+        <lastmod>2012-04-05T11:48:48-05:00</lastmod>
+    </url>
+    <url>
+        <loc>http://vongrippen.com/blog/2012/04/03/next-up-symfony/</loc>
+        <lastmod>2012-04-05T11:48:48-05:00</lastmod>
+    </url>
+    <url>
+        <loc>http://vongrippen.com/blog/2012/04/05/symfony-development-on-os-x-lion/</loc>
+        <lastmod>2012-04-05T11:48:48-05:00</lastmod>
+    </url>
+    <url>
+        <loc>http://vongrippen.com/blog/archives/</loc>
+        <lastmod>2012-04-05T11:48:48-05:00</lastmod>
+    </url>
+    <url>
+        <loc>http://vongrippen.com/</loc>
+        <lastmod>2012-04-05T11:48:48-05:00</lastmod>
+    </url>
+</urlset>

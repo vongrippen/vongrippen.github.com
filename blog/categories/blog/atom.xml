@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: blog | Mike Cochran]]></title>
+  <link href="http://vongrippen.com/blog/categories/blog/atom.xml" rel="self"/>
+  <link href="http://vongrippen.com/"/>
+  <updated>2012-04-05T11:51:15-05:00</updated>
+  <id>http://vongrippen.com/</id>
+  <author>
+    <name><![CDATA[Mike Cochran]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Up and Running on Octopress!]]></title>
+    <link href="http://vongrippen.com/blog/2011/09/27/up-and-running-on-octopress/"/>
+    <updated>2011-09-27T20:13:00-05:00</updated>
+    <id>http://vongrippen.com/blog/2011/09/27/up-and-running-on-octopress</id>
+    <content type="html"><![CDATA[<p>I've relaunched using <a href="http://www.octopress.org">Octopress</a> to power this new
+site. If you haven't checked it out before, I highly recommend that you do.
+Now that things are simpler than ever to post, I'm hoping to get to posting
+more tips, tricks, and tutorials than ever before. So be sure to check back
+and see what I'm up to.</p>
+]]></content>
+  </entry>
+  
+</feed>

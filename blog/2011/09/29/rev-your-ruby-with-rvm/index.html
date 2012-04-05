@@ -1,0 +1,723 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Rev Your Ruby With RVM - Mike Cochran</title>
+  <meta name="author" content="Mike Cochran">
+
+  
+  <meta name="description" content="What&#8217;s this RVM thing? Simply: RVM is Ruby Version Manager. There you go all done, see you back here next week! Ok, in all seriousness RVM is a &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://vongrippen.com/blog/2011/09/29/rev-your-ruby-with-rvm">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Mike Cochran" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Josefin+Sans' rel='stylesheet' type='text/css'>
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-6466300-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Mike Cochran</a></h1>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:vongrippen.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Rev Your Ruby With RVM</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-09-29T11:06:00-05:00" pubdate data-updated="true">Sep 29<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><h2>What&#8217;s this RVM thing?</h2>
+
+<p><span class='pullquote-right' data-pullquote='RVM is Ruby Version Manager '>
+Simply: RVM is Ruby Version Manager.</p>
+
+<p>There you go all done, see you back here next week!</p>
+
+<p>Ok, in all seriousness RVM is a fantastic tool when you are working with
+multiple ruby projects. It allows you to install multiple versions (and
+implementations) of the ruby interpreter and use different ones for different
+projects. It also extends all the way down to your gems, allowing you to have
+completely different sets of gems installed for different projects.</p>
+
+<p>I&#8217;m not going to go into deep technical details here. If you want to go in
+depth, check out the <a href="https://rvm.beginrescueend.com/">RVM website</a>.
+</span></p>
+
+<h2>Ok, but why do I need it?</h2>
+
+<p>RVM sounds kinda interesting and maybe it might conceivably be useful, but you
+don&#8217;t see how you could ever have an actual use for it right? Wrong!</p>
+
+<!-- more -->
+
+
+<p>Let&#8217;s take 2 projects that I have right now:</p>
+
+<ul>
+<li>Shiny new Rails 3 app that acts as an OpenID provider</li>
+<li>Legacy Rails 2.3.8 project management app that is too big to migrate at the moment</li>
+</ul>
+
+
+<h3>Rubies of many shades and varieties</h3>
+
+<p><span class='pullquote-right' data-pullquote='So I clearly have to have both 1.8.7 and 1.9.2 installed, but how? '>
+This Rails 3 app that I&#8217;m working on was written specifically with Ruby 1.9 in
+mind and takes advantage of a couple of new things so it won&#8217;t even run on 1.8.7.</p>
+
+<p>Meanwhile my Rails 2.3.8 app has a lot going on in it involving time tracking
+and we all know that date handling changed from 1.8 to 1.9. Some would say,
+well just go fix that 2.3.8 app to run on 1.9. Unfortunately this is not an
+option because there are a lot of other things going on that are different from
+1.8 to 1.9 and I just don&#8217;t have the time right now.</p>
+
+<p>So I clearly have to have both 1.8.7 and 1.9.2 installed, but how? Here is where RVM comes in.
+</span></p>
+
+<p>Using RVM I can install both versions and switch between them. Here&#8217;s what I mean:</p>
+
+<pre><code># The system-provided ruby
+$ ruby -v
+ruby 1.8.7 (2010-01-10 patchlevel 249) [universal-darwin11.0]
+
+# Now let's use RVM's ruby 1.8.7
+$ rvm use 1.8.7
+Using /Users/vongrippen/.rvm/gems/ruby-1.8.7-p334
+$ ruby -v
+ruby 1.8.7 (2011-02-18 patchlevel 334) [i686-darwin10.7.0]
+
+# Now lets use ruby 1.9.2
+$ rvm use 1.9.2
+Using /Users/vongrippen/.rvm/gems/ruby-1.9.2-p180
+$ ruby -v
+ruby 1.9.2p180 (2011-02-18 revision 30909) [x86_64-darwin11.1.0]
+
+# I could even switch to another variety of ruby even, like JRuby
+$ rvm use jruby
+Using /Users/vongrippen/.rvm/gems/jruby-1.6.2
+$ ruby -v
+jruby 1.6.2 (ruby-1.8.7-p330) (2011-05-23 e2ea975) (Java HotSpot(TM) 64-Bit Server VM 1.6.0_26) [darwin-x86_64-java]
+</code></pre>
+
+<p>As I work I can change ruby versions at will, pretty useful isn&#39;t it?</p>
+
+<h3>Gems of every shape and size</h3>
+
+<p><span class='pullquote-right' data-pullquote='RVM saves the day again with gemsets. '>
+Rubygems allows me to install multiple versions of a gem so I should be good,
+right? Alas, no.</p>
+
+<p>My Rails 3 app has a dependency on rubygems 1.7 or higher, but the rails 2.3
+app will only run if rubygems is version 1.4.2 or lower! This is more than just
+a slight problem for me since I&#8217;m doing development work in both and can&#8217;t be
+reinstalling rubygems all day long when I switch. Not to mention that they
+require different versions of rack that interfere with each other.</p>
+
+<p>Here, RVM saves the day again with gemsets. RVM includes another feature
+called gemsets, which are complete rubygems environments all bottled up and
+separated.</p>
+
+<p>Let me show you an example:</p>
+
+<figure class='code'><figcaption><span>The gemset for my Rails 2.3.8 app</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>rvm use 1.8.7@rails2.3.8
+</span><span class='line'>Using /Users/vongrippen/.rvm/gems/ruby-1.8.7-p334 with gemset rails2.3.8
+</span><span class='line'><span class="nv">$ </span>gem -v
+</span><span class='line'>1.4.2
+</span><span class='line'><span class="nv">$ </span>gem list -l
+</span><span class='line'>
+</span><span class='line'>*** LOCAL GEMS ***
+</span><span class='line'>
+</span><span class='line'>actionmailer <span class="o">(</span>2.3.8<span class="o">)</span>
+</span><span class='line'>actionpack <span class="o">(</span>2.3.8<span class="o">)</span>
+</span><span class='line'>activerecord <span class="o">(</span>2.3.8<span class="o">)</span>
+</span><span class='line'>activeresource <span class="o">(</span>2.3.8<span class="o">)</span>
+</span><span class='line'>activesupport <span class="o">(</span>2.3.8<span class="o">)</span>
+</span><span class='line'>rack <span class="o">(</span>1.1.2<span class="o">)</span>
+</span><span class='line'>rails <span class="o">(</span>2.3.8<span class="o">)</span>
+</span><span class='line'>rake <span class="o">(</span>0.8.7<span class="o">)</span>
+</span><span class='line'>sqlite3 <span class="o">(</span>1.3.4<span class="o">)</span>
+</span><span class='line'>sqlite3-ruby <span class="o">(</span>1.3.3<span class="o">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>Using the rails3.1 gemset I&#8217;ve created</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>rvm use 1.9.2@rails3.1
+</span><span class='line'>Using /Users/vongrippen/.rvm/gems/ruby-1.9.2-p180 with gemset rails3.1
+</span><span class='line'><span class="nv">$ </span>gem -v
+</span><span class='line'>1.8.10
+</span><span class='line'><span class="nv">$ </span>gem list -l
+</span><span class='line'>
+</span><span class='line'>*** LOCAL GEMS ***
+</span><span class='line'>
+</span><span class='line'>actionmailer <span class="o">(</span>3.1.0<span class="o">)</span>
+</span><span class='line'>actionpack <span class="o">(</span>3.1.0<span class="o">)</span>
+</span><span class='line'>activemodel <span class="o">(</span>3.1.0<span class="o">)</span>
+</span><span class='line'>activerecord <span class="o">(</span>3.1.0<span class="o">)</span>
+</span><span class='line'>activeresource <span class="o">(</span>3.1.0<span class="o">)</span>
+</span><span class='line'>activesupport <span class="o">(</span>3.1.0<span class="o">)</span>
+</span><span class='line'>arel <span class="o">(</span>2.2.1<span class="o">)</span>
+</span><span class='line'>bcrypt-ruby <span class="o">(</span>3.0.1<span class="o">)</span>
+</span><span class='line'>builder <span class="o">(</span>3.0.0<span class="o">)</span>
+</span><span class='line'>bundler <span class="o">(</span>1.0.20<span class="o">)</span>
+</span><span class='line'>erubis <span class="o">(</span>2.7.0<span class="o">)</span>
+</span><span class='line'>hike <span class="o">(</span>1.2.1<span class="o">)</span>
+</span><span class='line'>i18n <span class="o">(</span>0.6.0<span class="o">)</span>
+</span><span class='line'>mail <span class="o">(</span>2.3.0<span class="o">)</span>
+</span><span class='line'>mime-types <span class="o">(</span>1.16<span class="o">)</span>
+</span><span class='line'>multi_json <span class="o">(</span>1.0.3<span class="o">)</span>
+</span><span class='line'>polyglot <span class="o">(</span>0.3.2<span class="o">)</span>
+</span><span class='line'>rack <span class="o">(</span>1.3.3<span class="o">)</span>
+</span><span class='line'>rack-cache <span class="o">(</span>1.0.3<span class="o">)</span>
+</span><span class='line'>rack-mount <span class="o">(</span>0.8.3<span class="o">)</span>
+</span><span class='line'>rack-ssl <span class="o">(</span>1.3.2<span class="o">)</span>
+</span><span class='line'>rack-test <span class="o">(</span>0.6.1<span class="o">)</span>
+</span><span class='line'>rails <span class="o">(</span>3.1.0<span class="o">)</span>
+</span><span class='line'>railties <span class="o">(</span>3.1.0<span class="o">)</span>
+</span><span class='line'>rake <span class="o">(</span>0.8.7<span class="o">)</span>
+</span><span class='line'>rdoc <span class="o">(</span>3.9.4<span class="o">)</span>
+</span><span class='line'>sprockets <span class="o">(</span>2.0.0<span class="o">)</span>
+</span><span class='line'>thor <span class="o">(</span>0.14.6<span class="o">)</span>
+</span><span class='line'>tilt <span class="o">(</span>1.3.3<span class="o">)</span>
+</span><span class='line'>treetop <span class="o">(</span>1.4.10<span class="o">)</span>
+</span><span class='line'>tzinfo <span class="o">(</span>0.3.29<span class="o">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So now I can even switch the entire set of gems from one project to the next
+without them interfering! Life just got a little bit easier when doing ruby
+development.</p>
+
+<p></span></p>
+
+<h2>Sounds useful, let&#8217;s install it!</h2>
+
+<p>Installing it is pretty easy, especially if you are on a Mac. Even still it&#8217;s
+easy on Linux too, you just have to install some extra libraries that most
+distributions don&#8217;t include by default. If you are on Windows? Sorry, but I&#8217;m
+not much help there. I don&#8217;t use Windows at all anymore, so I haven&#8217;t the
+slightest idea how to install rvm there or if it is even possible. Your best
+bet is RVM&#8217;s <a href="https://rvm.beginrescueend.com/">official documentation</a>.</p>
+
+<h3>Got a shiny Mac here, where to start?</h3>
+
+<p>First things first, do you have <a href="http://developer.apple.com/xcode/">Xcode</a> installed?</p>
+
+<p>If not you will need to install it. On 10.6 (Snow Leopard) or earlier, look
+for Xcode 3 since it is free. 10.6 can also run Xcode 4.0, but it costs $5
+from the App Store. I&#8217;m using OS X 10.7 Lion, which means I&#8217;ll be using Xcode
+4.1 which is free from the <a href="http://itunes.apple.com/us/app/xcode/id448457090?mt=12">Mac App Store</a>.</p>
+
+<p>Also, if you are running Xcode 3 you will need to install <a href="http://code.google.com/p/git-osx-installer/">Git</a>.</p>
+
+<p>Now that you have Xcode installed it&#8217;s time to get our hands dirty in a terminal.</p>
+
+<p>Let&#8217;s download and run the RVM installer all in one simple command</p>
+
+<pre><code>bash -s stable &lt; &lt;(curl -s https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvm-installer)
+</code></pre>
+
+<p>Now, we need to add RVM to the end of your bash .profile using your favorite
+text editor (if you are using zsh, this file is ~/.zshrc)</p>
+
+<figure class='code'><figcaption><span>~/.profile</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>  <span class="o">[[</span> -s <span class="s2">&quot;$HOME/.rvm/scripts/rvm&quot;</span> <span class="o">]]</span> <span class="o">&amp;&amp;</span> . <span class="s2">&quot;$HOME/.rvm/scripts/rvm&quot;</span> <span class="c"># This loads RVM into a shell session.</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now, either reload your profile by running <code>source ~/.profile</code> or restart your shell to load RVM.</p>
+
+<p>Alright, RVM is installed but we still need to install a few rubies, skip past
+the part on installing RVM in Linux and lets get some rubies.</p>
+
+<h3>Sometimes I like to get down with a little Linux</h3>
+
+<p>There is a decent sized list of dependencies that may or may not be installed
+on your system already, I&#8217;ve listed the install commands for some of the most
+common distributions below. If your distro is not on the list, after running
+the base RVM install (before installing any ruby versions), run <code>rvm requirements</code>
+to see the list of dependencies.</p>
+
+<p>The absolute bare minimum just to get RVM installed is a system copy of ruby
+and git, but that&#8217;s still not a necessarily functional RVM.</p>
+
+<figure class='code'><figcaption><span>openSUSE</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo zypper install -y patterns-openSUSE-devel_basis ruby git gcc-c++ bzip2 readline-devel zlib-devel libxml2-devel libxslt-devel libyaml-devel libopenssl-devel libffi45-devel libtool bison
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>Debian/Ubuntu</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo apt-get install ruby-full build-essential openssl libreadline6 libreadline6-dev curl git-core zlib1g zlib1g-dev libssl-dev libyaml-dev libsqlite3-0 libsqlite3-dev sqlite3 libxml2-dev libxslt-dev autoconf libc6-dev ncurses-dev automake libtool bison
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>Fedora/CentOS</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>yum install -y ruby git-core gcc-c++ patch readline readline-devel zlib zlib-devel libyaml-devel libffi-devel openssl-devel
+</span><span class='line'>yum install -y make bzip2 autoconf automake libtool bison
+</span><span class='line'>yum install -y iconv-devel
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>Arch</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>pacman -Sy --noconfirm ruby git gcc patch curl zlib readline libxml2 libxslt git autoconf diffutils make libtool bison
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>Gentoo</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>emerge ruby libiconv readline zlib openssl curl git libyaml sqlite libxslt libtool bison
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now that you have all of your depedencies and libraries all installed we can
+go about installing RVM.</p>
+
+<pre><code>bash -s stable &lt; &lt;(curl -s https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvm-installer)
+</code></pre>
+
+<p>Now, we need to add RVM to the end of your bash .profile using your favorite
+text editor (if you are using zsh, this file is ~/.zshrc)</p>
+
+<figure class='code'><figcaption><span>~/.profile</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>  <span class="o">[[</span> -s <span class="s2">&quot;$HOME/.rvm/scripts/rvm&quot;</span> <span class="o">]]</span> <span class="o">&amp;&amp;</span> . <span class="s2">&quot;$HOME/.rvm/scripts/rvm&quot;</span> <span class="c"># This loads RVM into a shell session.</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now, either reload your profile by running <code>source ~/.profile</code> or restart your shell to load RVM.</p>
+
+<h2>Let&#8217;s pick out some rubyies</h2>
+
+<p>Now that you have RVM itself installed we still need to install at least 1 ruby
+interpreter. Since I&#8217;m using OS X Lion, I&#8217;m going to install 1.8.7, 1.9.2, and
+macruby. MacRuby is a little bit special, because it is Mac only and requires
+that the LLVM compiler suite be installed.</p>
+
+<p><em>A full list of available rubies for installation can be found by running <code>rvm list known</code></em></p>
+
+<pre><code>$ rvm install 1.8.7
+Installing Ruby from source to: /Users/vongrippen/.rvm/rubies/ruby-1.8.7-p352, this may take a while depending on your cpu(s)...
+
+ruby-1.8.7-p352 - #fetching 
+ruby-1.8.7-p352 - #downloading ruby-1.8.7-p352, this may take a while depending on your connection...
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100 4108k  100 4108k    0     0   180k      0  0:00:22  0:00:22 --:--:--  235k
+100 4108k  100 4108k    0     0   178k      0  0:00:22  0:00:22 --:--:--  178kruby-1.8.7-p352 - #extracting ruby-1.8.7-p352 to /Users/vongrippen/.rvm/src/ruby-1.8.7-p352
+ruby-1.8.7-p352 - #extracted to /Users/vongrippen/.rvm/src/ruby-1.8.7-p352
+ruby-1.8.7-p352 - #configuring 
+ruby-1.8.7-p352 - #compiling 
+ruby-1.8.7-p352 - #installing 
+Removing old Rubygems files...
+Installing rubygems-1.8.10 for ruby-1.8.7-p352 ...
+Installation of rubygems completed successfully.
+ruby-1.8.7-p352 - adjusting #shebangs for (gem irb erb ri rdoc testrb rake).
+ruby-1.8.7-p352 - #importing default gemsets (/Users/vongrippen/.rvm/gemsets/)
+Install of ruby-1.8.7-p352 - #complete
+
+$ rvm install 1.9.2
+Installing Ruby from source to: /Users/vongrippen/.rvm/rubies/ruby-1.9.2-p290, this may take a while depending on your cpu(s)...
+
+ruby-1.9.2-p290 - #fetching 
+ruby-1.9.2-p290 - #downloading ruby-1.9.2-p290, this may take a while depending on your connection...
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100 8604k  100 8604k    0     0   695k      0  0:00:12  0:00:12 --:--:--  939k
+ruby-1.9.2-p290 - #extracting ruby-1.9.2-p290 to /Users/vongrippen/.rvm/src/ruby-1.9.2-p290
+ruby-1.9.2-p290 - #extracted to /Users/vongrippen/.rvm/src/ruby-1.9.2-p290
+Fetching yaml-0.1.4.tar.gz to /Users/vongrippen/.rvm/archives
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100  460k  100  460k    0     0   409k      0  0:00:01  0:00:01 --:--:--  435k
+Extracting yaml-0.1.4.tar.gz to /Users/vongrippen/.rvm/src
+Configuring yaml in /Users/vongrippen/.rvm/src/yaml-0.1.4.
+Compiling yaml in /Users/vongrippen/.rvm/src/yaml-0.1.4.
+Installing yaml to /Users/vongrippen/.rvm/usr
+ruby-1.9.2-p290 - #configuring 
+ruby-1.9.2-p290 - #compiling 
+ ruby-1.9.2-p290 - #installing 
+Removing old Rubygems files...
+Installing rubygems-1.8.10 for ruby-1.9.2-p290 ...
+Installation of rubygems completed successfully.
+ruby-1.9.2-p290 - adjusting #shebangs for (gem irb erb ri rdoc testrb rake).
+ruby-1.9.2-p290 - #importing default gemsets (/Users/vongrippen/.rvm/gemsets/)
+Install of ruby-1.9.2-p290 - #complete
+
+$ rvm install macruby
+Retrieving MacRuby 0.10 ...
+Archive:  /Users/vongrippen/.rvm/archives/MacRuby%200.10.zip
+  inflating: /Users/vongrippen/.rvm/src/macruby-0.10/MacRuby 0.10.pkg  
+Password: &lt;Your administrative password&gt;
+</code></pre>
+
+<p>Pretty easy wasn&#8217;t it? Now you have several versions of ruby installed and
+available to you.</p>
+
+<h2>But wait, there&#8217;s more!</h2>
+
+<p>You&#8217;ve only gotten started on the capabilities here, there&#8217;s still gemsets,
+rvmrc, and more that I&#8217;m not going to cover in depth here. For more information
+on those huge timesavers, checkout RVM&#8217;s <a href="http://rvm.beginrescueend.com">website</a>.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Mike Cochran</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-09-29T11:06:00-05:00" pubdate data-updated="true">Sep 29<span>th</span>, 2011</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/bundler/'>bundler</a>, <a class='category' href='/blog/categories/gem/'>gem</a>, <a class='category' href='/blog/categories/ruby/'>ruby</a>, <a class='category' href='/blog/categories/rvm/'>rvm</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://vongrippen.com/blog/2011/09/29/rev-your-ruby-with-rvm/" data-via="vongrippen" data-counturl="http://vongrippen.com/blog/2011/09/29/rev-your-ruby-with-rvm/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2011/09/27/up-and-running-on-octopress/" title="Previous Post: Up and Running on Octopress!">&laquo; Up and Running on Octopress!</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2012/02/05/roasted-parsnips/" title="Next Post: What's new? Parsnips!">What's new? Parsnips! &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2012/04/05/symfony-development-on-os-x-lion/">Symfony Development on OS X Lion</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/04/03/next-up-symfony/">Next Up? Symfony</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/02/05/roasted-parsnips/">What's new? Parsnips!</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/09/29/rev-your-ruby-with-rvm/">Rev Your Ruby With RVM</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/09/27/up-and-running-on-octopress/">Up and Running on Octopress!</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/vongrippen">@vongrippen</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'vongrippen',
+            count: 4,
+            skip_forks: false,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("vongrippen", 3, true);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/vongrippen" class="twitter-follow-button" data-show-count="false">Follow @vongrippen</a>
+  
+</section>
+
+
+
+<section class="googleplus googleplus-hidden">
+  <h1>
+    <a href="https://plus.google.com/115039531233863976997?rel=author">
+      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
+      Google+
+    </a>
+  </h1>
+</section>
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - Mike Cochran -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'vongrippen';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://vongrippen.com/blog/2011/09/29/rev-your-ruby-with-rvm/';
+        var disqus_url = 'http://vongrippen.com/blog/2011/09/29/rev-your-ruby-with-rvm/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
