@@ -4,7 +4,7 @@
   <title><![CDATA[Category: mysql | Mike Cochran]]></title>
   <link href="http://vongrippen.com/blog/categories/mysql/atom.xml" rel="self"/>
   <link href="http://vongrippen.com/"/>
-  <updated>2012-04-05T11:14:23-05:00</updated>
+  <updated>2012-04-05T11:15:36-05:00</updated>
   <id>http://vongrippen.com/</id>
   <author>
     <name><![CDATA[Mike Cochran]]></name>
@@ -24,6 +24,9 @@ convenience of apt-get to install and magically configure a basic LAMP stack for
 me. But, I'm going to be doing my development on OS X Lion which doesn't have that.
 Luckily, Lion does have Apache and PHP included (but not MySQL) they just need
 to be configured and in the case of MySQL, installed.</p>
+
+<!-- more -->
+
 
 <p>Well, lets get started with: Apache.</p>
 

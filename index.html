@@ -110,120 +110,12 @@ me. But, I&#8217;m going to be doing my development on OS X Lion which doesn&#82
 Luckily, Lion does have Apache and PHP included (but not MySQL) they just need
 to be configured and in the case of MySQL, installed.</p>
 
-<p>Well, lets get started with: Apache.</p>
-
-<h2>Setting up Apache and PHP</h2>
-
-<p>OS X Lion comes with Apache by default, we just need to turn it on and configure
-it. On my machine I have Server.app installed making it an OS X server which
-changes things just a little bit, so I&#8217;ll document for both Server.app and
-non-Server.app</p>
-
-<h3>Without Server.app</h3>
-
-<p>First, we have to enable Web Sharing</p>
-
-<ol>
-<li>Open System Preferences</li>
-<li>Goto Sharing, in the Internet &amp; Wireless category</li>
-<li>Put a check next to Web Sharing</li>
-</ol>
-
-
-<p>Now, we have to enable PHP support and userdir support so that we can use the
-Sites/ directory in your home folder.</p>
-
-<ol>
-<li>Open Terminal</li>
-<li>Run: <code>sudo nano /private/etc/apache2/httpd.conf</code></li>
-<li>Find and uncomment the following lines: (remove the # from the beginning)
-
-<pre><code> LoadModule php5_module libexec/apache2/libphp5.so
- LoadModule apple_userdir_module libexec/apache2/mod_userdir_apple.so
-</code></pre></li>
-<li>Restart apache: <code>sudo apachectl restart</code></li>
-</ol>
-
-
-<h3>With Server.app</h3>
-
-<p>First, we have to enable Web Server</p>
-
-<ol>
-<li>Open Server.app</li>
-<li>Connect to your local machine</li>
-<li>Goto Web</li>
-<li>Check &#8220;Enable PHP web applications&#8221;</li>
-<li>Flip the switch to On</li>
-</ol>
-
-
-<p>Now, we have to enable userdir support so that we can use the Sites/ directory
-in your home folder.</p>
-
-<ol>
-<li>Open Terminal</li>
-<li>Run: <code>sudo nano /private/etc/apache2/httpd.conf</code></li>
-<li>Find and uncomment the following line: (remove the # from the beginning)
-
-<pre><code> LoadModule apple_userdir_module libexec/apache2/mod_userdir_apple.so
-</code></pre></li>
-<li>Restart apache: <code>sudo apachectl restart</code></li>
-</ol>
-
-
-<h3>Let&#8217;s Test It!</h3>
-
-<p>Let&#8217;s just test our PHP and userdir support with a simple phpinfo().</p>
-
-<ol>
-<li>Open ~/Sites/</li>
-<li>Create a file: info.php with a phpinfo() statement</li>
-<li>Open a web browser to http://localhost/<username>/info.php</li>
-<li>If you see the phpinfo screen then everything worked perfectly, otherwise go back and retry.</li>
-</ol>
-
-
-<figure class='code'><figcaption><span>info.php</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span> <span class="nb">phpinfo</span><span class="p">();</span> <span class="cp">?&gt;</span><span class="x"></span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Setting up MySQL</h2>
-
-<p>OS X Lion unfortunately does not bundle MySQL with it as well. So we&#8217;ll have
-to go download and install it ourselves. We&#8217;ll also grab a couple of other nice
-GUI tools from the MySQL project that can come in handy later.</p>
-
-<ol>
-<li><a href="http://www.mysql.com/downloads/mysql/">Download</a> the MySQL DMG (Mac OS X ver. 10.6 (x86, 64-bit), DMG Archive)</li>
-<li>Install MySQL Community Server with the default values from the DMG you just downloaded</li>
-</ol>
-
-
-<p>While it is possible to run the MySQL server from a command line by typing in
-<code>/usr/local/mysql/bin/mysqld_safe &amp;</code>, it gets pretty old fast. So, let&#8217;s install
-the startup item and PrefPane.</p>
-
-<ol>
-<li>Open the MySQL Community Server DMG</li>
-<li>Install MySQLStartupItem.pkg</li>
-<li>Double click on MySQL.prefPane, choosing to &#8220;Install for All Users&#8221;</li>
-<li>Using the new MySQL Preferences Pane in the category Other, you can start and stop MySQL and choose whether or not it should run on startup</li>
-</ol>
-
-
-<p>Now there are a few handy tools that I like to install for MySQL, but they are
-entirely optional. All of them are free:</p>
-
-<ul>
-<li><a href="http://www.mysql.com/downloads/workbench/">MySQL Workbench</a></li>
-<li><a href="http://www.sequelpro.com/">Sequel Pro</a></li>
-<li><a href="http://www.phpmyadmin.net/home_page/">phpMyAdmin</a> <em>Only if you are comfortable enough installing this by hand</em></li>
-</ul>
-
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/blog/2012/04/05/symfony-development-on-os-x-lion/">Read on &rarr;</a>
+    </footer>
   
 
 
