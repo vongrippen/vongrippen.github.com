@@ -7,6 +7,7 @@ categories:
 - php
 - symfony
 - programming
+published: true
 ---
 
 So, I've decided it was time to learn some PHP. I mean, phpinfo() and include()
@@ -21,4 +22,4 @@ And so it begins...
 
 I'll try to track my success/failure here, but no promises. Because _everyone_
 knows how frequently I actually post, not to mention the fine quality of said
-posts. _sic_
+posts. [_sic_]
