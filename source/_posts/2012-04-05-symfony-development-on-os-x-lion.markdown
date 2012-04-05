@@ -21,6 +21,7 @@ me. But, I'm going to be doing my development on OS X Lion which doesn't have th
 Luckily, Lion does have Apache and PHP included (but not MySQL) they just need
 to be configured and in the case of MySQL, installed.
 
+<!-- more -->
 Well, lets get started with: Apache.
 
 ## Setting up Apache and PHP ##
