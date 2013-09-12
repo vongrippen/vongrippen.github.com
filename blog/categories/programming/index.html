@@ -183,6 +183,23 @@
 </section>
 
 
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("vongrippen", 3, true);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/vongrippen" class="twitter-follow-button" data-show-count="false">Follow @vongrippen</a>
+  
+</section>
+
+
 
 <section class="googleplus googleplus-hidden">
   <h1>
