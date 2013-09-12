@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: ruby | Mike Cochran]]></title>
+  <link href="http://vongrippen.com/blog/categories/ruby/atom.xml" rel="self"/>
+  <link href="http://vongrippen.com/"/>
+  <updated>2013-09-11T19:18:32-05:00</updated>
+  <id>http://vongrippen.com/</id>
+  <author>
+    <name><![CDATA[Mike Cochran]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Rev Your Ruby With RVM]]></title>
+    <link href="http://vongrippen.com/blog/2011/09/29/rev-your-ruby-with-rvm/"/>
+    <updated>2011-09-29T11:06:00-05:00</updated>
+    <id>http://vongrippen.com/blog/2011/09/29/rev-your-ruby-with-rvm</id>
+    <content type="html"><![CDATA[<h2>What&rsquo;s this RVM thing?</h2>
+
+<p>Surround your pullquote like this {" text to be quoted "}</p>
+
+<h2>Ok, but why do I need it?</h2>
+
+<p>RVM sounds kinda interesting and maybe it might conceivably be useful, but you
+don&rsquo;t see how you could ever have an actual use for it right? Wrong!</p>
+
+<!-- more -->
+
+
+<p>Let&rsquo;s take 2 projects that I have right now:</p>
+
+<ul>
+<li>Shiny new Rails 3 app that acts as an OpenID provider</li>
+<li>Legacy Rails 2.3.8 project management app that is too big to migrate at the moment</li>
+</ul>
+
+
+<h3>Rubies of many shades and varieties</h3>
+
+<p>Surround your pullquote like this {" text to be quoted "}</p>
+
+<p>Using RVM I can install both versions and switch between them. Here&rsquo;s what I mean:</p>
+
+<pre><code># The system-provided ruby
+$ ruby -v
+ruby 1.8.7 (2010-01-10 patchlevel 249) [universal-darwin11.0]
+
+# Now let's use RVM's ruby 1.8.7
+$ rvm use 1.8.7
+Using /Users/vongrippen/.rvm/gems/ruby-1.8.7-p334
+$ ruby -v
+ruby 1.8.7 (2011-02-18 patchlevel 334) [i686-darwin10.7.0]
+
+# Now lets use ruby 1.9.2
+$ rvm use 1.9.2
+Using /Users/vongrippen/.rvm/gems/ruby-1.9.2-p180
+$ ruby -v
+ruby 1.9.2p180 (2011-02-18 revision 30909) [x86_64-darwin11.1.0]
+
+# I could even switch to another variety of ruby even, like JRuby
+$ rvm use jruby
+Using /Users/vongrippen/.rvm/gems/jruby-1.6.2
+$ ruby -v
+jruby 1.6.2 (ruby-1.8.7-p330) (2011-05-23 e2ea975) (Java HotSpot(TM) 64-Bit Server VM 1.6.0_26) [darwin-x86_64-java]
+</code></pre>
+
+<p>As I work I can change ruby versions at will, pretty useful isn&#39;t it?</p>
+
+<h3>Gems of every shape and size</h3>
+
+<p>Surround your pullquote like this {" text to be quoted "}</p>
+
+<h2>Sounds useful, let&rsquo;s install it!</h2>
+
+<p>Installing it is pretty easy, especially if you are on a Mac. Even still it&rsquo;s
+easy on Linux too, you just have to install some extra libraries that most
+distributions don&rsquo;t include by default. If you are on Windows? Sorry, but I&rsquo;m
+not much help there. I don&rsquo;t use Windows at all anymore, so I haven&rsquo;t the
+slightest idea how to install rvm there or if it is even possible. Your best
+bet is RVM&rsquo;s <a href="https://rvm.beginrescueend.com/">official documentation</a>.</p>
+
+<h3>Got a shiny Mac here, where to start?</h3>
+
+<p>First things first, do you have <a href="http://developer.apple.com/xcode/">Xcode</a> installed?</p>
+
+<p>If not you will need to install it. On 10.6 (Snow Leopard) or earlier, look
+for Xcode 3 since it is free. 10.6 can also run Xcode 4.0, but it costs $5
+from the App Store. I&rsquo;m using OS X 10.7 Lion, which means I&rsquo;ll be using Xcode
+4.1 which is free from the <a href="http://itunes.apple.com/us/app/xcode/id448457090?mt=12">Mac App Store</a>.</p>
+
+<p>Also, if you are running Xcode 3 you will need to install <a href="http://code.google.com/p/git-osx-installer/">Git</a>.</p>
+
+<p>Now that you have Xcode installed it&rsquo;s time to get our hands dirty in a terminal.</p>
+
+<p>Let&rsquo;s download and run the RVM installer all in one simple command</p>
+
+<pre><code>bash -s stable &lt; &lt;(curl -s https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvm-installer)
+</code></pre>
+
+<p>Now, we need to add RVM to the end of your bash .profile using your favorite
+text editor (if you are using zsh, this file is ~/.zshrc)</p>
+
+<p><code>bash ~/.profile
+  [[ -s "$HOME/.rvm/scripts/rvm" ]] &amp;&amp; . "$HOME/.rvm/scripts/rvm" # This loads RVM into a shell session.
+</code></p>
+
+<p>Now, either reload your profile by running <code>source ~/.profile</code> or restart your shell to load RVM.</p>
+
+<p>Alright, RVM is installed but we still need to install a few rubies, skip past
+the part on installing RVM in Linux and lets get some rubies.</p>
+
+<h3>Sometimes I like to get down with a little Linux</h3>
+
+<p>There is a decent sized list of dependencies that may or may not be installed
+on your system already, I&rsquo;ve listed the install commands for some of the most
+common distributions below. If your distro is not on the list, after running
+the base RVM install (before installing any ruby versions), run <code>rvm requirements</code>
+to see the list of dependencies.</p>
+
+<p>The absolute bare minimum just to get RVM installed is a system copy of ruby
+and git, but that&rsquo;s still not a necessarily functional RVM.</p>
+
+<p><code>bash openSUSE
+sudo zypper install -y patterns-openSUSE-devel_basis ruby git gcc-c++ bzip2 readline-devel zlib-devel libxml2-devel libxslt-devel libyaml-devel libopenssl-devel libffi45-devel libtool bison
+</code></p>
+
+<p><code>bash Debian/Ubuntu
+sudo apt-get install ruby-full build-essential openssl libreadline6 libreadline6-dev curl git-core zlib1g zlib1g-dev libssl-dev libyaml-dev libsqlite3-0 libsqlite3-dev sqlite3 libxml2-dev libxslt-dev autoconf libc6-dev ncurses-dev automake libtool bison
+</code></p>
+
+<p><code>bash Fedora/CentOS
+yum install -y ruby git-core gcc-c++ patch readline readline-devel zlib zlib-devel libyaml-devel libffi-devel openssl-devel
+yum install -y make bzip2 autoconf automake libtool bison
+yum install -y iconv-devel
+</code></p>
+
+<p><code>bash Arch
+pacman -Sy --noconfirm ruby git gcc patch curl zlib readline libxml2 libxslt git autoconf diffutils make libtool bison
+</code></p>
+
+<p><code>bash Gentoo
+emerge ruby libiconv readline zlib openssl curl git libyaml sqlite libxslt libtool bison
+</code></p>
+
+<p>Now that you have all of your depedencies and libraries all installed we can
+go about installing RVM.</p>
+
+<pre><code>bash -s stable &lt; &lt;(curl -s https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvm-installer)
+</code></pre>
+
+<p>Now, we need to add RVM to the end of your bash .profile using your favorite
+text editor (if you are using zsh, this file is ~/.zshrc)</p>
+
+<p><code>bash ~/.profile
+  [[ -s "$HOME/.rvm/scripts/rvm" ]] &amp;&amp; . "$HOME/.rvm/scripts/rvm" # This loads RVM into a shell session.
+</code></p>
+
+<p>Now, either reload your profile by running <code>source ~/.profile</code> or restart your shell to load RVM.</p>
+
+<h2>Let&rsquo;s pick out some rubyies</h2>
+
+<p>Now that you have RVM itself installed we still need to install at least 1 ruby
+interpreter. Since I&rsquo;m using OS X Lion, I&rsquo;m going to install 1.8.7, 1.9.2, and
+macruby. MacRuby is a little bit special, because it is Mac only and requires
+that the LLVM compiler suite be installed.</p>
+
+<p><em>A full list of available rubies for installation can be found by running <code>rvm list known</code></em></p>
+
+<pre><code>$ rvm install 1.8.7
+Installing Ruby from source to: /Users/vongrippen/.rvm/rubies/ruby-1.8.7-p352, this may take a while depending on your cpu(s)...
+
+ruby-1.8.7-p352 - #fetching 
+ruby-1.8.7-p352 - #downloading ruby-1.8.7-p352, this may take a while depending on your connection...
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100 4108k  100 4108k    0     0   180k      0  0:00:22  0:00:22 --:--:--  235k
+100 4108k  100 4108k    0     0   178k      0  0:00:22  0:00:22 --:--:--  178kruby-1.8.7-p352 - #extracting ruby-1.8.7-p352 to /Users/vongrippen/.rvm/src/ruby-1.8.7-p352
+ruby-1.8.7-p352 - #extracted to /Users/vongrippen/.rvm/src/ruby-1.8.7-p352
+ruby-1.8.7-p352 - #configuring 
+ruby-1.8.7-p352 - #compiling 
+ruby-1.8.7-p352 - #installing 
+Removing old Rubygems files...
+Installing rubygems-1.8.10 for ruby-1.8.7-p352 ...
+Installation of rubygems completed successfully.
+ruby-1.8.7-p352 - adjusting #shebangs for (gem irb erb ri rdoc testrb rake).
+ruby-1.8.7-p352 - #importing default gemsets (/Users/vongrippen/.rvm/gemsets/)
+Install of ruby-1.8.7-p352 - #complete
+
+$ rvm install 1.9.2
+Installing Ruby from source to: /Users/vongrippen/.rvm/rubies/ruby-1.9.2-p290, this may take a while depending on your cpu(s)...
+
+ruby-1.9.2-p290 - #fetching 
+ruby-1.9.2-p290 - #downloading ruby-1.9.2-p290, this may take a while depending on your connection...
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100 8604k  100 8604k    0     0   695k      0  0:00:12  0:00:12 --:--:--  939k
+ruby-1.9.2-p290 - #extracting ruby-1.9.2-p290 to /Users/vongrippen/.rvm/src/ruby-1.9.2-p290
+ruby-1.9.2-p290 - #extracted to /Users/vongrippen/.rvm/src/ruby-1.9.2-p290
+Fetching yaml-0.1.4.tar.gz to /Users/vongrippen/.rvm/archives
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100  460k  100  460k    0     0   409k      0  0:00:01  0:00:01 --:--:--  435k
+Extracting yaml-0.1.4.tar.gz to /Users/vongrippen/.rvm/src
+Configuring yaml in /Users/vongrippen/.rvm/src/yaml-0.1.4.
+Compiling yaml in /Users/vongrippen/.rvm/src/yaml-0.1.4.
+Installing yaml to /Users/vongrippen/.rvm/usr
+ruby-1.9.2-p290 - #configuring 
+ruby-1.9.2-p290 - #compiling 
+ ruby-1.9.2-p290 - #installing 
+Removing old Rubygems files...
+Installing rubygems-1.8.10 for ruby-1.9.2-p290 ...
+Installation of rubygems completed successfully.
+ruby-1.9.2-p290 - adjusting #shebangs for (gem irb erb ri rdoc testrb rake).
+ruby-1.9.2-p290 - #importing default gemsets (/Users/vongrippen/.rvm/gemsets/)
+Install of ruby-1.9.2-p290 - #complete
+
+$ rvm install macruby
+Retrieving MacRuby 0.10 ...
+Archive:  /Users/vongrippen/.rvm/archives/MacRuby%200.10.zip
+  inflating: /Users/vongrippen/.rvm/src/macruby-0.10/MacRuby 0.10.pkg  
+Password: &lt;Your administrative password&gt;
+</code></pre>
+
+<p>Pretty easy wasn&rsquo;t it? Now you have several versions of ruby installed and
+available to you.</p>
+
+<h2>But wait, there&rsquo;s more!</h2>
+
+<p>You&rsquo;ve only gotten started on the capabilities here, there&rsquo;s still gemsets,
+rvmrc, and more that I&rsquo;m not going to cover in depth here. For more information
+on those huge timesavers, checkout RVM&rsquo;s <a href="http://rvm.beginrescueend.com">website</a>.</p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -5,7 +5,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Mike Cochran</title>
+  <title>Symfony Development on OS X Lion - Mike Cochran</title>
   <meta name="author" content="Mike Cochran">
 
   
@@ -19,7 +19,7 @@ I&rsquo;m used to running Debian web servers and having &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://vongrippen.com">
+  <link rel="canonical" href="http://vongrippen.com/blog/2012/04/05/symfony-development-on-os-x-lion">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="http://feeds.feedburner.com/Vongrippen" rel="alternate" title="Mike Cochran" type="application/atom+xml">
@@ -77,15 +77,12 @@ I&rsquo;m used to running Debian web servers and having &hellip;">
 </nav>
   <div id="main">
     <div id="content">
-      <div class="blog-index">
+      <div>
+<article class="hentry" role="article">
   
-  
-  
-    <article>
-      
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2012/04/05/symfony-development-on-os-x-lion/">Symfony Development on OS X Lion</a></h1>
+      <h1 class="entry-title">Symfony Development on OS X Lion</h1>
     
     
       <p class="meta">
@@ -108,82 +105,135 @@ I&rsquo;m used to running Debian web servers and having &hellip;">
   </header>
 
 
-  <div class="entry-content"><p>So, I&rsquo;ve got my first tiny little hiccup in my learning of PHP through Symfony&hellip;
+<div class="entry-content"><p>So, I&rsquo;ve got my first tiny little hiccup in my learning of PHP through Symfony&hellip;
 I&rsquo;m used to running <a href="http://www.debian.org">Debian</a> web servers and having the
 convenience of apt-get to install and magically configure a basic LAMP stack for
 me. But, I&rsquo;m going to be doing my development on OS X Lion which doesn&rsquo;t have that.
 Luckily, Lion does have Apache and PHP included (but not MySQL) they just need
 to be configured and in the case of MySQL, installed.</p>
 
+<!-- more -->
+
+
+<p>Well, lets get started with: Apache.</p>
+
+<h2>Setting up Apache and PHP</h2>
+
+<p>OS X Lion comes with Apache by default, we just need to turn it on and configure
+it. On my machine I have Server.app installed making it an OS X server which
+changes things just a little bit, so I&rsquo;ll document for both Server.app and
+non-Server.app</p>
+
+<h3>Without Server.app</h3>
+
+<p>First, we have to enable Web Sharing</p>
+
+<ol>
+<li>Open System Preferences</li>
+<li>Goto Sharing, in the Internet &amp; Wireless category</li>
+<li>Put a check next to Web Sharing</li>
+</ol>
+
+
+<p>Now, we have to enable PHP support and userdir support so that we can use the
+Sites/ directory in your home folder.</p>
+
+<ol>
+<li>Open Terminal</li>
+<li>Run: <code>sudo nano /private/etc/apache2/httpd.conf</code></li>
+<li>Find and uncomment the following lines: (remove the # from the beginning)
+     LoadModule php5_module libexec/apache2/libphp5.so
+     LoadModule apple_userdir_module libexec/apache2/mod_userdir_apple.so</li>
+<li>Restart apache: <code>sudo apachectl restart</code></li>
+</ol>
+
+
+<h3>With Server.app</h3>
+
+<p>First, we have to enable Web Server</p>
+
+<ol>
+<li>Open Server.app</li>
+<li>Connect to your local machine</li>
+<li>Goto Web</li>
+<li>Check &ldquo;Enable PHP web applications&rdquo;</li>
+<li>Flip the switch to On</li>
+</ol>
+
+
+<p>Now, we have to enable userdir support so that we can use the Sites/ directory
+in your home folder.</p>
+
+<ol>
+<li>Open Terminal</li>
+<li>Run: <code>sudo nano /private/etc/apache2/httpd.conf</code></li>
+<li>Find and uncomment the following line: (remove the # from the beginning)
+     LoadModule apple_userdir_module libexec/apache2/mod_userdir_apple.so</li>
+<li>Restart apache: <code>sudo apachectl restart</code></li>
+</ol>
+
+
+<h3>Let&rsquo;s Test It!</h3>
+
+<p>Let&rsquo;s just test our PHP and userdir support with a simple phpinfo().</p>
+
+<ol>
+<li>Open ~/Sites/</li>
+<li>Create a file: info.php with a phpinfo() statement</li>
+<li>Open a web browser to <a href="http://localhost/">http://localhost/</a><username>/info.php</li>
+<li>If you see the phpinfo screen then everything worked perfectly, otherwise go back and retry.</li>
+</ol>
+
+
+<figure class='code'><figcaption><span>info.php</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="o">&lt;?</span><span class="nx">php</span> <span class="nb">phpinfo</span><span class="p">();</span> <span class="cp">?&gt;</span><span class="x"></span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Setting up MySQL</h2>
+
+<p>OS X Lion unfortunately does not bundle MySQL with it as well. So we&rsquo;ll have
+to go download and install it ourselves. We&rsquo;ll also grab a couple of other nice
+GUI tools from the MySQL project that can come in handy later.</p>
+
+<ol>
+<li><a href="http://www.mysql.com/downloads/mysql/">Download</a> the MySQL DMG (Mac OS X ver. 10.6 (x86, 64-bit), DMG Archive)</li>
+<li>Install MySQL Community Server with the default values from the DMG you just downloaded</li>
+</ol>
+
+
+<p>While it is possible to run the MySQL server from a command line by typing in
+<code>/usr/local/mysql/bin/mysqld_safe &amp;</code>, it gets pretty old fast. So, let&rsquo;s install
+the startup item and PrefPane.</p>
+
+<ol>
+<li>Open the MySQL Community Server DMG</li>
+<li>Install MySQLStartupItem.pkg</li>
+<li>Double click on MySQL.prefPane, choosing to &ldquo;Install for All Users&rdquo;</li>
+<li>Using the new MySQL Preferences Pane in the category Other, you can start and stop MySQL and choose whether or not it should run on startup</li>
+</ol>
+
+
+<p>Now there are a few handy tools that I like to install for MySQL, but they are
+entirely optional. All of them are free:</p>
+
+<ul>
+<li><a href="http://www.mysql.com/downloads/workbench/">MySQL Workbench</a></li>
+<li><a href="http://www.sequelpro.com/">Sequel Pro</a></li>
+<li><a href="http://www.phpmyadmin.net/home_page/">phpMyAdmin</a> <em>Only if you are comfortable enough installing this by hand</em></li>
+</ul>
+
 </div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2012/04/05/symfony-development-on-os-x-lion/">Read on &rarr;</a>
-    </footer>
-  
 
 
-    </article>
-  
-  
-    <article>
+  <footer>
+    <p class="meta">
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/04/03/next-up-symfony/">Next Up? Symfony</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
   
 
+<span class="byline author vcard">Posted by <span class="fn">Mike Cochran</span></span>
 
-<time datetime="2012-04-03T16:55:00-05:00" pubdate data-updated="true">Apr 3<span>rd</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>So, I&rsquo;ve decided it was time to learn some PHP. I mean, phpinfo() and include()
-are all I really need to know right? <em>Wrong</em>.</p>
-
-<p>Thus, I have decided it is time to sit down and learn a bit of PHP. Now that I&rsquo;ve
-reached that decision, where to start? What better place than a framework that
-I hear good things about, is supposedly similar to Rails, and I know a lot of
-my friends use?</p>
-
-<p>And so it begins&hellip;</p>
-
-<p>I&rsquo;ll try to track my success/failure here, but no promises. Because <em>everyone</em>
-knows how frequently I actually post, not to mention the fine quality of said
-posts. [<em>sic</em>]</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/02/05/roasted-parsnips/">What&#8217;s New? Parsnips!</a></h1>
-    
-    
-      <p class="meta">
-        
 
 
 
@@ -195,144 +245,48 @@ posts. [<em>sic</em>]</p>
   
 
 
-<time datetime="2012-02-05T20:10:00-06:00" pubdate data-updated="true">Feb 5<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>So, I&rsquo;ve decided that I should branch out a little bit and&hellip; actually start
-posting things. Anyways, on with the post!</p>
-
-<p><em>In my best game show host voice:</em></p>
-
-<p>What&rsquo;s new this time? Food! That&rsquo;s right, food. Everyone&rsquo;s favorite thing to
-eat! Fresh from your kitchen in approximately 45 minutes, you too can enjoy
-this treat with your whole family. Why with food you won&rsquo;t have to worry about
-that nasty rumble in your stomach, and thanks to our unique patent-pending
-design it&rsquo;s both healthy and delicious!</p>
-
-<p>How do we do it? Well let&rsquo;s see!</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2012/02/05/roasted-parsnips/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
+<time datetime="2012-04-05T09:34:00-05:00" pubdate data-updated="true">Apr 5<span>th</span>, 2012</time>
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2011/09/29/rev-your-ruby-with-rvm/">Rev Your Ruby With RVM</a></h1>
-    
-    
-      <p class="meta">
-        
 
-
-
-
-
-
-
-
+<span class="categories">
   
+    <a class='category' href='/blog/categories/apache/'>apache</a>, <a class='category' href='/blog/categories/lion/'>lion</a>, <a class='category' href='/blog/categories/mac-os-x/'>mac os x</a>, <a class='category' href='/blog/categories/mysql/'>mysql</a>, <a class='category' href='/blog/categories/php/'>php</a>, <a class='category' href='/blog/categories/programming/'>programming</a>, <a class='category' href='/blog/categories/symfony/'>symfony</a>
+  
+</span>
 
 
-<time datetime="2011-09-29T11:06:00-05:00" pubdate data-updated="true">Sep 29<span>th</span>, 2011</time>
-        
-      </p>
+    </p>
     
-  </header>
-
-
-  <div class="entry-content"><h2>What&rsquo;s this RVM thing?</h2>
-
-<p><span class='pullquote-right' data-pullquote='RVM is Ruby Version Manager'>
-Simply: RVM is Ruby Version Manager.</p>
-
-<p>There you go all done, see you back here next week!</p>
-
-<p>Ok, in all seriousness RVM is a fantastic tool when you are working with
-multiple ruby projects. It allows you to install multiple versions (and
-implementations) of the ruby interpreter and use different ones for different
-projects. It also extends all the way down to your gems, allowing you to have
-completely different sets of gems installed for different projects.</p>
-
-<p>I&rsquo;m not going to go into deep technical details here. If you want to go in
-depth, check out the <a href="https://rvm.beginrescueend.com/">RVM website</a>.
-</span></p>
-
-<h2>Ok, but why do I need it?</h2>
-
-<p>RVM sounds kinda interesting and maybe it might conceivably be useful, but you
-don&rsquo;t see how you could ever have an actual use for it right? Wrong!</p>
-
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://vongrippen.com/blog/2012/04/05/symfony-development-on-os-x-lion/" data-via="vongrippen" data-counturl="http://vongrippen.com/blog/2012/04/05/symfony-development-on-os-x-lion/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
 </div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2011/09/29/rev-your-ruby-with-rvm/">Read on &rarr;</a>
-    </footer>
-  
 
-
-    </article>
-  
-  
-    <article>
+    
+    <p class="meta">
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2011/09/27/up-and-running-on-octopress/">Up and Running on Octopress!</a></h1>
-    
-    
-      <p class="meta">
-        
+        <a class="basic-alignment left" href="/blog/2012/04/03/next-up-symfony/" title="Previous Post: Next Up? Symfony">&laquo; Next Up? Symfony</a>
+      
+      
+    </p>
+  </footer>
+</article>
 
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-09-27T20:13:00-05:00" pubdate data-updated="true">Sep 27<span>th</span>, 2011</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I&rsquo;ve relaunched using <a href="http://www.octopress.org">Octopress</a> to power this new
-site. If you haven&rsquo;t checked it out before, I highly recommend that you do.
-Now that things are simpler than ever to post, I&rsquo;m hoping to get to posting
-more tips, tricks, and tutorials than ever before. So be sure to check back
-and see what I&rsquo;m up to.</p>
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 </div>
-  
-  
+  </section>
 
-
-    </article>
-  
-  <div class="pagination">
-    
-    <a href="/blog/archives">Blog Archives</a>
-    
-  </div>
 </div>
+
 <aside class="sidebar">
   
     <section>
@@ -348,7 +302,7 @@ and see what I&rsquo;m up to.</p>
       </li>
     
       <li class="post">
-        <a href="/blog/2012/02/05/roasted-parsnips/">What&#8217;s New? Parsnips!</a>
+        <a href="/blog/2012/02/05/roasted-parsnips/">What's New? Parsnips!</a>
       </li>
     
       <li class="post">
@@ -365,7 +319,7 @@ and see what I&rsquo;m up to.</p>
 <section>
   <h1>GitHub Repos</h1>
   <ul id="gh_repos">
-    <li class="loading">Status updating&#8230;</li>
+    <li class="loading">Status updating...</li>
   </ul>
   
   <a href="https://github.com/vongrippen">@vongrippen</a> on GitHub
@@ -407,6 +361,7 @@ and see what I&rsquo;m up to.</p>
   
 </aside>
 
+
     </div>
   </div>
   <footer role="contentinfo"><p>
@@ -421,7 +376,10 @@ and see what I&rsquo;m up to.</p>
       var disqus_shortname = 'vongrippen';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://vongrippen.com/blog/2012/04/05/symfony-development-on-os-x-lion/';
+        var disqus_url = 'http://vongrippen.com/blog/2012/04/05/symfony-development-on-os-x-lion/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
